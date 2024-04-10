@@ -14,7 +14,7 @@ const env = cleanEnv(process.env, {
     GOOGLE_OAUTH_CLIENT_SECRET: str(),
     GOOGLE_OAUTH_REDIRECT_URL: str(),
     MONGO_URL:str(),
-    NODE_ENV:str(),
+    // NODE_ENV:str(),
 
 });
 
