@@ -4,7 +4,7 @@ import { compare, genSalt, hash } from "bcrypt";
 
 import jwt from 'jsonwebtoken'
 import env from "../lib/env";
-import { getGoogleOauthTokens, getGoogleOauthTokensForSignup, getGoogleUser } from "../services/userAuth.service";
+import { getGoogleOauthTokens, getGoogleUser } from "../services/userAuth.service";
 import { jwtDecode } from "jwt-decode";
 
 
@@ -160,6 +160,8 @@ export const googleAuth : RequestHandler = async(req, res, next) => {
 
     try {
         const {code} = req.body;
+        console.log(code)
+
 
         
       

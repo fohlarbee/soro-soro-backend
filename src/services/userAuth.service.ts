@@ -24,12 +24,13 @@ interface GoogleUserResults {
 export async function  getGoogleOauthTokens ({code}:{code: string}) : Promise<GoogleTokensResult>{
 
 const url = 'https://oauth2.googleapis.com/token';
+// console.log(code)
 
     const values = {
         code,
         client_id:env.GOOGLE_OAUTH_CLIENT_ID,
         client_secret:env.GOOGLE_OAUTH_CLIENT_SECRET,
-        redirect_uri:env.GOOGLE_OAUTH_REDIRECT_URL,
+        redirect_uri:'https://soro-soro-app.vercel.app',
         grant_type:'authorization_code'
 
         // grant_type:'implicit'
@@ -42,78 +43,80 @@ const url = 'https://oauth2.googleapis.com/token';
             }
 
         })
+        // console.log(res.data)
 
         return res.data;
         
     } catch (error : any) {
-        console.log(error)
+        console.log(error.response.config.data)
+        console.log(error.response.data.error)
         throw new Error(error.response.data.error)
         
     }
 
 }
-export async function  getGoogleOauthTokensForSignin ({code}:{code: string}) : Promise<GoogleTokensResult>{
+// export async function  getGoogleOauthTokensForSignin ({code}:{code: string}) : Promise<GoogleTokensResult>{
 
-const url = 'https://oauth2.googleapis.com/token';
+// const url = 'https://oauth2.googleapis.com/token';
 
-    const values = {
-        code,
-        client_id:env.GOOGLE_OAUTH_CLIENT_ID,
-        client_secret:env.GOOGLE_OAUTH_CLIENT_SECRET,
-        redirect_uri:env.GOOGLE_OAUTH_REDIRECT_URL,
-        grant_type:'authorization_code'
+//     const values = {
+//         code,
+//         client_id:env.GOOGLE_OAUTH_CLIENT_ID,
+//         client_secret:env.GOOGLE_OAUTH_CLIENT_SECRET,
+//         redirect_uri:env.GOOGLE_OAUTH_REDIRECT_URL,
+//         grant_type:'authorization_code'
 
 
-    }
+//     }
 
-    try {
-        const res = await axios.post<GoogleTokensResult>(url, qs.stringify(values),{
-            headers:{
-                'Content-Type':'application/x-www-form-urlencoded',
-            }
+//     try {
+//         const res = await axios.post<GoogleTokensResult>(url, qs.stringify(values),{
+//             headers:{
+//                 'Content-Type':'application/x-www-form-urlencoded',
+//             }
 
-        })
-        // console.log(res.data)
-        return res.data;
+//         })
+//         // console.log(res.data)
+//         return res.data;
         
-    } catch (error : any) {
-        console.log(error)
-        throw new Error(error)
+//     } catch (error : any) {
+//         console.log(error)
+//         throw new Error(error)
         
-    }
+//     }
 
-}
-export async function  getGoogleOauthTokensForSignup ({code}:{code: string}) : Promise<GoogleTokensResult>{
+// }
+// export async function  getGoogleOauthTokensForSignup ({code}:{code: string}) : Promise<GoogleTokensResult>{
 
-const url = 'https://oauth2.googleapis.com/token';
+// const url = 'https://oauth2.googleapis.com/token';
 
-const values = {
-    code,
-    client_id:env.GOOGLE_OAUTH_CLIENT_ID,
-    client_secret:env.GOOGLE_OAUTH_CLIENT_SECRET,
-    redirect_uri:env.GOOGLE_OAUTH_REDIRECT_URL,
-    grant_type:'authorization_code'
+// const values = {
+//     code,
+//     client_id:env.GOOGLE_OAUTH_CLIENT_ID,
+//     client_secret:env.GOOGLE_OAUTH_CLIENT_SECRET,
+//     redirect_uri:env.GOOGLE_OAUTH_REDIRECT_URL,
+//     grant_type:'authorization_code'
 
-}
+// }
 
 
-    try {
-        const res = await axios.post<GoogleTokensResult>(url, qs.stringify(values),{
-            headers:{
-                'Content-Type':'application/x-www-form-urlencoded',
-            }
+//     try {
+//         const res = await axios.post<GoogleTokensResult>(url, qs.stringify(values),{
+//             headers:{
+//                 'Content-Type':'application/x-www-form-urlencoded',
+//             }
 
-        })
-        // console.log(res.data)
-        return res.data;
+//         })
+//         // console.log(res.data)
+//         return res.data;
         
-    } catch (error : any) {
-        console.log(error)
-        throw new Error(error)
+//     } catch (error : any) {
+//         console.log(error)
+//         throw new Error(error)
         
-    }
+//     }
 
-}
+// }
 
 export async function getGoogleUser({id_token, access_token}: {id_token: string, access_token :string}): Promise<GoogleUserResults>{
 
@@ -123,12 +126,12 @@ export async function getGoogleUser({id_token, access_token}: {id_token: string,
                 Authorization:`Bearer ${id_token}`
             }
         })
-
+        console.log('google user', res.data)
         return res.data
     
         
     } catch (error: any) {
-        throw new Error(error.message                               )
+        throw new Error(error.message)
     } 
 
 }
